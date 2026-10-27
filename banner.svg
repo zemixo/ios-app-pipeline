@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-labelledby="title desc">
+<title id="title">iOS App Pipeline</title><desc id="desc">Zemixo pixel workshop. Test, check, capture and prepare.</desc>
+<rect width="1280" height="360" rx="20" fill="#10182c"/>
+<path d="M0 300H1280M0 320H1280M0 340H1280" stroke="#1b2945"/>
+<g fill="#233552"><rect x="36" y="35" width="6" height="6"/><rect x="1200" y="72" width="8" height="8"/><rect x="1160" y="35" width="4" height="4"/><rect x="42" y="255" width="4" height="4"/></g>
+<g transform="translate(70 92)" shape-rendering="crispEdges">
+<path d="M56 0h8v22h-8zM64 0h12v10H64z" fill="#e7d8ad"/>
+<path d="M20 22h88v8h12v64h-12v12H20V94H8V30h12z" fill="#e7d8ad"/>
+<path d="M28 38h72v8h8v36h-8v8H28v-8h-8V46h8z" fill="#17253e"/>
+<path d="M40 55h12v12H40zM76 55h12v12H76z" fill="#80c9e8"/>
+<path d="M36 118h60v44H36zM20 126h12v28H20zM100 126h12v28h-12zM36 166h20v10H36zM76 166h20v10H76z" fill="#e7d8ad"/>
+<rect x="56" y="130" width="20" height="16" fill="#80c9e8"/>
+</g>
+<g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+<text x="250" y="88" fill="#80c9e8" font-size="16" letter-spacing="3">ZEMIXO / DEVELOPER TOOLS</text>
+<text x="250" y="153" fill="#f1e8cf" font-size="48" font-weight="700">iOS App Pipeline</text>
+<text x="252" y="192" fill="#aab7cb" font-size="20">A clear path from private source to release review.</text>
+<g font-size="15" fill="#e7d8ad"><text x="271" y="264">01 TEST</text><text x="483" y="264">02 CHECK</text><text x="695" y="264">03 CAPTURE</text><text x="929" y="264">04 PREPARE</text></g>
+</g>
+<g fill="none" stroke="#3a5274" stroke-width="2"><rect x="250" y="233" width="160" height="48" rx="4"/><rect x="462" y="233" width="160" height="48" rx="4"/><rect x="674" y="233" width="182" height="48" rx="4"/><rect x="908" y="233" width="182" height="48" rx="4"/><path d="M412 257h48m164 0h48m186 0h48"/></g>
+</svg>

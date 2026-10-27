@@ -1,0 +1,5 @@
+include LICENSE README.md README.zh-CN.md banner.svg
+include INTEGRATION.md DEVELOPMENT.md SECURITY.md CONTRIBUTING.md
+include VALIDATION.md
+include pipeline.example.toml pipeline.demo.toml
+include demo_fixture.py native_fixture.py test_ios_pipeline.py

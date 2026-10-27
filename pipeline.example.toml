@@ -1,0 +1,39 @@
+# Copy into your PRIVATE project as pipeline.local.toml and customize it.
+# The project must be a Git working-tree root. Commands run in that directory.
+schema = 1
+name = "my-ios-app"
+environment = ["XCODE_PROJECT", "APP_SCHEME", "TEST_DESTINATION"]
+
+[[steps]]
+id = "test"
+command = ["xcodebuild", "-project", "${XCODE_PROJECT}", "-scheme", "${APP_SCHEME}", "-destination", "${TEST_DESTINATION}", "-derivedDataPath", "${PIPELINE_STEP_DIR}/DerivedData", "-resultBundlePath", "${PIPELINE_STEP_DIR}/Tests.xcresult", "test"]
+outputs = ["Tests.xcresult"]
+check = "xcresult"
+# Set this to your reviewed test baseline. Skips and expected failures block the gate.
+minimum_tests = 1
+timeout = 1800
+
+[[steps]]
+id = "preflight"
+# Install apple-presubmit-audit separately. Its exit status determines this gate.
+command = ["apple-presubmit-audit", "--project", "${PIPELINE_PROJECT_DIR}", "--no-asc", "--json"]
+outputs = ["command.log"]
+
+[[steps]]
+id = "screenshots"
+# Provide this lane in YOUR project's Fastfile; example in INTEGRATION.md.
+command = ["bundle", "exec", "fastlane", "ios", "pipeline_screenshots"]
+# Declare every required image: a missing language or screen must block preparation.
+outputs = ["screenshots/en-US/01-home.png", "screenshots/zh-Hans/01-home.png"]
+check = "screenshots"
+timeout = 1800
+
+[[steps]]
+id = "archive"
+command = ["xcodebuild", "-project", "${XCODE_PROJECT}", "-scheme", "${APP_SCHEME}", "-destination", "generic/platform=iOS", "-archivePath", "${PIPELINE_STEP_DIR}/MyApp.xcarchive", "archive"]
+outputs = ["MyApp.xcarchive"]
+check = "archive"
+bundle_id = "com.example.myapp"
+version = "1.0"
+build = "1"
+timeout = 1800

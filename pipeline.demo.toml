@@ -1,0 +1,15 @@
+schema = 1
+name = "synthetic-demo"
+
+[[steps]]
+id = "prepare-fixture"
+command = ["${PIPELINE_PYTHON}", "demo_fixture.py", "prepare"]
+outputs = ["synthetic.json"]
+
+[[steps]]
+id = "check-synthetic-image"
+command = ["${PIPELINE_PYTHON}", "demo_fixture.py", "screenshot"]
+outputs = ["synthetic.png"]
+check = "screenshots"
+width = 16
+height = 16
