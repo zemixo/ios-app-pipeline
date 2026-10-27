@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-15]
+        python: ["3.11", "3.14"]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Unit and failure-path tests
+        run: python -m unittest -v test_ios_pipeline
+      - name: Install and exercise packaged CLI
+        run: |
+          python -m pip install .
+          ios-pipeline --version
+          ios-pipeline plan --config pipeline.example.toml
+          ios-pipeline run --config pipeline.demo.toml
+      - name: Compile and inspect whitespace
+        run: |
+          python -m py_compile ios_pipeline.py demo_fixture.py native_fixture.py
+          git diff --check
+
+  native-ios:
+    runs-on: macos-15
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: "3.11"
+      - name: Prepare fixture generator
+        run: |
+          command -v xcodegen || brew install xcodegen
+          xcodegen --version
+          xcodebuild -version
+      - name: Native tests, UI screenshot, unsigned archive and resume
+        run: python native_fixture.py
